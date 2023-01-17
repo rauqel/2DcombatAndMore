@@ -28,40 +28,16 @@ public class CharacterController2D : MonoBehaviour
 
         Flip();
         Jump();
-        SmoothMovement();
     }
 
     private void FixedUpdate()
     {
-        playerRB.velocity = new Vector2(horizontal * currentSpeed, playerRB.velocity.y);
+        playerRB.velocity = new Vector2(horizontal * walkSpeed, playerRB.velocity.y);
     }
 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, whatIsGround);
-    }
-
-    private void SmoothMovement()
-    {
-        if(playerRB.velocity.magnitude == 0)
-        {
-            currentSpeed = 0;
-        }
-        /*else
-        {
-            currentSpeed += Time.deltaTime;
-        }*/
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("hey");
-            currentSpeed += Time.deltaTime;
-        }
-        if(currentSpeed >= walkSpeed)
-        {
-            currentSpeed = walkSpeed;
-        }
-
-       // Debug.Log(currentSpeed);
     }
 
     private void Flip()
