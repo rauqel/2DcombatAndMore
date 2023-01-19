@@ -339,7 +339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842974179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.914, z: 0}
+  m_LocalPosition: {x: 0, y: -8.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1731307928}
@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 1731307926}
   - component: {fileID: 1731307925}
   - component: {fileID: 1731307929}
+  - component: {fileID: 1731307930}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -612,8 +613,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.011242092}
-  m_Size: {x: 1, y: 1.8544968}
+  m_Offset: {x: 0.114822984, y: -0.08255243}
+  m_Size: {x: 2.8895295, y: 17.684881}
   m_Direction: 0
 --- !u!212 &1731307927
 SpriteRenderer:
@@ -655,8 +656,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.7169812, g: 0.60920215, b: 0, a: 1}
+  m_Sprite: {fileID: 5496613473064455456, guid: bae484dbe98868c4c94c80217e89053d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -675,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 1731307924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.79, y: -0.93, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 842974180}
   m_Father: {fileID: 0}
@@ -694,12 +695,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 3
+  sprintSpeed: 5
   jumpForce: 10
   playerRB: {fileID: 1731307925}
   groundCheck: {fileID: 842974180}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+--- !u!95 &1731307930
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731307924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 829d8afd8afc3c04994998eff90fb26f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1763458415
 GameObject:
   m_ObjectHideFlags: 0

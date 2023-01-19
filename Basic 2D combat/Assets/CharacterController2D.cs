@@ -4,35 +4,46 @@ using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float jumpForce;
+    [Header("Movement")]
     private float currentSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float jumpForce;
 
+    [Header("Ground Check")]
     [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask whatIsGround;
 
+    [Header("Key Codes")]
+    private KeyCode jumpButton = KeyCode.Space;
+    private KeyCode sprintButton = KeyCode.LeftShift;
+
+    [Header("Conditions")]
+    private bool isSprinting;
+
+    private Animator anim;
+
     private float horizontal;
     private bool isFacingRight = true;
 
-    private KeyCode jumpButton = KeyCode.Space;
-
     private void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        playerRB.velocity = new Vector2(horizontal * currentSpeed, playerRB.velocity.y);
+
+        anim.SetFloat("PlayerVelocity", Mathf.Abs(playerRB.velocity.magnitude));
+        anim.SetBool("isSprinting", isSprinting);
+        Debug.Log(isSprinting);
 
         Flip();
         Jump();
-    }
-
-    private void FixedUpdate()
-    {
-        playerRB.velocity = new Vector2(horizontal * walkSpeed, playerRB.velocity.y);
+        Run();
     }
 
     private bool IsGrounded()
@@ -48,6 +59,8 @@ public class CharacterController2D : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
+
         }
     }
 
@@ -55,5 +68,22 @@ public class CharacterController2D : MonoBehaviour
     {
         if (Input.GetKeyDown(jumpButton) && IsGrounded())
             playerRB.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Run()
+    {
+        if (Input.GetKey(sprintButton) && IsGrounded())
+            isSprinting = true;
+        else
+            isSprinting = false;
+
+
+        //
+        if (isSprinting)
+        {
+            currentSpeed = sprintSpeed;
+        }
+        else
+            currentSpeed = walkSpeed;
     }
 }
