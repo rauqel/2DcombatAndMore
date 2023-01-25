@@ -20,7 +20,6 @@ public class ZombieMovement : MonoBehaviour
 
     void Update()
     {
-        //hookRB.transform.position = gameObject.transform.position;
 
         ZombieToPlayer();
     }

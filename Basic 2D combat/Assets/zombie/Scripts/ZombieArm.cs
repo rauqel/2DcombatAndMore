@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ZombieArm : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D hookRB;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private DistanceJoint2D distanceJoint;
 
     private void Update()
     {

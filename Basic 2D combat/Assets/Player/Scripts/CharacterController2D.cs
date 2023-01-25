@@ -39,7 +39,6 @@ public class CharacterController2D : MonoBehaviour
 
         anim.SetFloat("PlayerVelocity", Mathf.Abs(playerRB.velocity.magnitude));
         anim.SetBool("isSprinting", isSprinting);
-        Debug.Log(isSprinting);
 
         Flip();
         Jump();
@@ -59,8 +58,6 @@ public class CharacterController2D : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-
-
         }
     }
 
