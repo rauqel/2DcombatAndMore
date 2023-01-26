@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class ZombieMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject playerObject;
-    [SerializeField] private float zomSpeed;
-    private Rigidbody2D zomRB;
+    [Header("Arm Offsets")]
+    [SerializeField] private Vector2 walkOffset;
+    [SerializeField] private Vector2 fallOffSet;
 
+    [Header("Shoulder Anchor")]
+    [SerializeField] private ZombieArm armScript;
+
+    [Header("Track Player")]
+    [SerializeField] private GameObject playerObject;
+    private bool isFacingRight;
+
+    [SerializeField] private float zomSpeed;
     private float distance;
 
-    [SerializeField] private Rigidbody2D hookRB;
-    [SerializeField] private Rigidbody2D shoulderRB;
 
-    void Start()
+    private Rigidbody2D zombieRB;
+
+    private void Awake()
     {
-        
+        zombieRB = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-
         ZombieToPlayer();
+        ZombieFlip();
+
+        UpdateArmOffset();
     }
 
     private void ZombieToPlayer()
@@ -31,8 +41,40 @@ public class ZombieMovement : MonoBehaviour
         direction.Normalize();
 
         transform.position = Vector2.MoveTowards
-            (this.transform.position, playerObject.transform.position, zomSpeed * Time.deltaTime);
+            (zombieRB.transform.position, playerObject.transform.position, zomSpeed * Time.deltaTime);
+    }
 
-        
+    private void ZombieFlip()
+    {
+        if(playerObject.transform.position.x < gameObject.transform.position.x)
+        {
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 0, this.transform.eulerAngles.z);
+            isFacingRight = false;
+        }
+        if(playerObject.transform.position.x > gameObject.transform.position.x)
+        {
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 180, this.transform.eulerAngles.z);
+            isFacingRight = true;
+        }
+    }
+
+    private void UpdateArmOffset()
+    {
+        Vector2 currentOffSet = Vector2.zero;
+
+        //falling
+        /*if(zombieRB.velocity.y < 0)
+        {
+            currentOffSet = fallOffSet;
+        }
+        else*/
+        currentOffSet = walkOffset;
+
+        if (!isFacingRight)
+        {
+            currentOffSet.x *= -1f;
+        }
+
+        armScript.partOffSet = currentOffSet;
     }
 }
