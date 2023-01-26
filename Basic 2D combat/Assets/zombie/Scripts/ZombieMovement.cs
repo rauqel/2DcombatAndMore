@@ -68,7 +68,8 @@ public class ZombieMovement : MonoBehaviour
             currentOffSet = fallOffSet;
         }
         else*/
-        currentOffSet = walkOffset;
+        currentOffSet.y = walkOffset.y;
+        currentOffSet.x = armScript.partOffSet.x;
 
         if (!isFacingRight)
         {

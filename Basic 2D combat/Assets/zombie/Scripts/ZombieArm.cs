@@ -9,7 +9,9 @@ public class ZombieArm : MonoBehaviour
 
     [SerializeField] private Transform[] armParts;
 
-    private Transform shoulderAnchor;
+    public Transform shoulderAnchor;
+
+    private float timer;
 
     private void Awake()
     {
@@ -19,6 +21,8 @@ public class ZombieArm : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
         Transform pieceToFollow = shoulderAnchor;
 
         foreach(Transform armPart in armParts)
